@@ -1,3 +1,6 @@
+/* Notes:
+Every element in HTML is an object in the DOM.  JS interacts with elements in the DOM. */
+
 /*
 GAME RULES:
 
@@ -8,3 +11,13 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 
 */
+var scores, roundScore, activePlayer, dice;
+
+scores = [0, 0];
+roundScore = 0;
+activePlayer = 0;
+
+dice = Math.floor(Math.random()*6)+1
+console.log(dice)
+
+document.querySelector(`#current-${activePlayer}`).textContent = dice;
