@@ -12,6 +12,7 @@ GAME RULES:
 
 */
 var scores, roundScore, activePlayer, gamePlaying, prevRoll;
+var winningScoreValue = document.querySelector('.winScore').value
 
 function init() {
   scores = [0, 0];
@@ -26,6 +27,11 @@ function init() {
   document.querySelector(`#name-0`).textContent = "Player 1";
   document.querySelector(`#name-1`).textContent = "Player 2";
   gamePlaying = true;
+  if (winningScoreValue.length === 0) {
+    winningScore = 20
+  } else {
+    winningScore = winningScoreValue
+  }
 }
 
 init();
@@ -38,7 +44,7 @@ document.querySelector(".btn-roll").addEventListener("click", function () {
   if (gamePlaying) {
     // 1. Random Number Generation
     var dice = Math.floor(Math.random() * 6) + 1;
-    prevRoll = dice;
+    // var dice = 6;
     // 2. Display result
     var diceDom = document.querySelector(`.dice`);
     diceDom.style.display = "block";
@@ -50,20 +56,25 @@ document.querySelector(".btn-roll").addEventListener("click", function () {
       document.querySelector(
         `#current-${activePlayer}`
       ).textContent = roundScore; // setter
-    } 
-    // else if (prevRoll + dice === 12) {
-    //   roundScore = 0;
-    //   document.querySelector(
-    //     `#current-${activePlayer}`
-    //   ).textContent = roundScore;
-    //   scores[activePlayer] = 0;
-    //   document.querySelector(`#score-${activePlayer}`).textContent =
-    //     scores[activePlayer];
-    // }
-     else {
-      // Next Player
-      nextPlayer();
+      prevRoll = dice;
     }
+    else if (prevRoll + dice === 12) {
+      roundScore = 0;
+      document.querySelector(
+        `#current-${activePlayer}`
+      ).textContent = roundScore;
+      scores[activePlayer] = 0;
+      document.querySelector(`#score-${activePlayer}`).textContent =
+        scores[activePlayer];
+      nextPlayer();
+      prevRoll = 0;
+    }
+    else {
+      nextPlayer();
+      prevRoll = 0;
+
+    }
+    // prevRoll = dice;
   }
 });
 
@@ -75,7 +86,7 @@ document.querySelector(".btn-hold").addEventListener("click", function () {
     document.querySelector(`#score-${activePlayer}`).textContent =
       scores[activePlayer];
     // 3. Check if player won game
-    if (scores[activePlayer] >= 20) {
+    if (scores[activePlayer] >= winningScore) {
       document.querySelector(`#name-${activePlayer}`).textContent = "Winner!";
       document.querySelector(".dice").style.display = "none";
       document
