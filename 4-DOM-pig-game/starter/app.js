@@ -27,11 +27,11 @@ function init() {
   document.querySelector(`#name-0`).textContent = "Player 1";
   document.querySelector(`#name-1`).textContent = "Player 2";
   gamePlaying = true;
-  if (winningScoreValue.length === 0) {
-    winningScore = 20
-  } else {
-    winningScore = winningScoreValue
-  }
+  // if (winningScoreValue.length === 0) {
+  //   winningScoreValue = 20
+  // } else {
+  //   winningScore = winningScoreValue
+  // }
 }
 
 init();
@@ -86,6 +86,13 @@ document.querySelector(".btn-hold").addEventListener("click", function () {
     document.querySelector(`#score-${activePlayer}`).textContent =
       scores[activePlayer];
     // 3. Check if player won game
+    var winningScore;
+    var input = document.querySelector('.winScore').value;
+    if (input) {
+      winningScore = input
+    } else {
+      winningScore = 100;
+    }
     if (scores[activePlayer] >= winningScore) {
       document.querySelector(`#name-${activePlayer}`).textContent = "Winner!";
       document.querySelector(".dice").style.display = "none";
