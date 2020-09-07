@@ -177,6 +177,30 @@
 
 // nateFriendly('boker')
 
-
 /* Coding Challenge 7 */
 
+var Question = function (question, [answers], correctAnswer) {
+  this.question = question;
+  this.answers = [answers];
+  this.correctAnswer = correctAnswer;
+  this.checkAnswer = function () {
+    if (givenAnswer === this.correctAnswer) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+};
+
+var question1 = new Question(
+  "What is the name of my pet?",
+  ["0. Mike", "1. Sam", "2. Jason"],
+  0
+);
+var question2 = new Question(
+  "When was I born?",
+  ["0. 1993", "1. 2008", "2. 1991"],
+  2
+);
+
+var randomQuestions = [question1, question2];
