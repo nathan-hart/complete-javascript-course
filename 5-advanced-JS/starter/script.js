@@ -108,3 +108,10 @@ var teacherQuestion = intQuestion("teacher");
 teacherQuestion("Nate");
 
 intQuestion("designer")('Neta')
+
+
+/* Immediatly Invoked Function Expressions (IIFE) - Used for Data Privacy - See lecture 67 */
+
+/* Closures */
+
+
