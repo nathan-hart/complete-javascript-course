@@ -178,18 +178,26 @@
 // nateFriendly('boker')
 
 /* Coding Challenge 7 */
+var givenAnswer;
 
-var Question = function (question, [answers], correctAnswer) {
+function Question(question, answers, correctAnswer) {
   this.question = question;
-  this.answers = [answers];
+  this.answers = answers;
   this.correctAnswer = correctAnswer;
-  this.checkAnswer = function () {
-    if (givenAnswer === this.correctAnswer) {
-      return true;
-    } else {
-      return false;
-    }
-  };
+  //   this.checkAnswer = function (givenAnswer) {
+  //     if (givenAnswer === this.correctAnswer) {
+  //       console.log("Correct!");
+  //     } else {
+  //       console.log("False!");
+  //     }
+  //   };
+}
+
+Question.prototype.displayQuestion() = function () {
+  console.log(this.question);
+  this.answers.forEach((element) => {
+    console.log(element);
+  });
 };
 
 var question1 = new Question(
@@ -202,5 +210,28 @@ var question2 = new Question(
   ["0. 1993", "1. 2008", "2. 1991"],
   2
 );
+var question3 = new Question(
+  "Where was I born?",
+  ["0. Wellington", "1. Melbs", "2. Jlem"],
+  1
+);
 
 var randomQuestions = [question1, question2];
+
+var randomQ = Math.round(Math.random(randomQuestions.length));
+
+var chooseQuestion = function () {
+  console.log(randomQ);
+  console.log(randomQuestions[randomQ].question);
+  console.log(randomQuestions[randomQ].answers);
+};
+
+var takeAnswer = function () {
+  var givenAnswer = prompt("Enter your answer:");
+  randomQuestions[randomQ].checkAnswer(givenAnswer);
+  //   chooseQuestion();
+  //   takeAnswer();
+};
+
+chooseQuestion();
+takeAnswer();
