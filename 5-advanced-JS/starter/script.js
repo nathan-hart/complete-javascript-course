@@ -178,27 +178,36 @@
 // nateFriendly('boker')
 
 /* Coding Challenge 7 */
-var givenAnswer;
+
 
 function Question(question, answers, correctAnswer) {
   this.question = question;
   this.answers = answers;
   this.correctAnswer = correctAnswer;
-  //   this.checkAnswer = function (givenAnswer) {
-  //     if (givenAnswer === this.correctAnswer) {
-  //       console.log("Correct!");
-  //     } else {
-  //       console.log("False!");
-  //     }
-  //   };
 }
 
-Question.prototype.displayQuestion() = function () {
+Question.prototype.displayQuestion = function () {
   console.log(this.question);
   this.answers.forEach((element) => {
     console.log(element);
   });
 };
+Question.prototype.checkAnswer = function (givenAnswer, callback) {
+  var sc;
+  if (givenAnswer === this.correctAnswer) {
+    console.log("Correct!");
+    sc = callback(true)
+  } else {
+    console.log("False!");
+    sc = callback(false)
+  }
+  this.displayScore(sc)
+};
+
+Question.prototype.displayScore = function (score) {
+  console.log(`Your current score is ${score}`
+  )
+}
 
 var question1 = new Question(
   "What is the name of my pet?",
@@ -216,22 +225,33 @@ var question3 = new Question(
   1
 );
 
-var randomQuestions = [question1, question2];
+// Getting and displaying random Question
+var randomQuestions = [question1, question2, question3];
 
-var randomQ = Math.round(Math.random(randomQuestions.length));
+function score() {
+  var sc = 0;
+  return function (correct) {
+    if (correct) {
+      sc++
+    }
+    return sc
+  }
+}
 
-var chooseQuestion = function () {
-  console.log(randomQ);
-  console.log(randomQuestions[randomQ].question);
-  console.log(randomQuestions[randomQ].answers);
-};
+var keepScore = score()
 
-var takeAnswer = function () {
+function playGame() {
+  var randomQ = Math.floor(Math.random() * randomQuestions.length);
+  randomQuestions[randomQ].displayQuestion();
+
+  // Prompt for answer and recording answer
   var givenAnswer = prompt("Enter your answer:");
-  randomQuestions[randomQ].checkAnswer(givenAnswer);
-  //   chooseQuestion();
-  //   takeAnswer();
-};
+  console.log(givenAnswer)
+  randomQuestions[randomQ].checkAnswer(parseInt(givenAnswer), keepScore);
+  if (givenAnswer !== 'exit') {
+    playGame();
+  }
+}
 
-chooseQuestion();
-takeAnswer();
+playGame();
+
