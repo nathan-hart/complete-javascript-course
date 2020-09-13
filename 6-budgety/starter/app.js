@@ -38,13 +38,11 @@ var budgetController = (function () {
   Expense.prototype.getPercentage = function () {
     return this.percentage;
   };
-
   var Income = function (id, description, value) {
     this.id = id;
     this.description = description;
     this.value = value;
   };
-
   var calcTotal = function (type) {
     var sum = 0;
     data.allItems[type].forEach(function (current) {
@@ -52,7 +50,6 @@ var budgetController = (function () {
       data.totals[type] = sum;
     });
   };
-
   var data = {
     allItems: {
       exp: [],
