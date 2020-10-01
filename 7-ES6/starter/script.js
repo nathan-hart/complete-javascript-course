@@ -198,3 +198,24 @@ for (const cur of ages) {
 }
 */
 
+/////////////////////////////////////////////////
+/* Spread Operator: */
+
+function addAges(a, b, c, d) {
+  return a + b + c + d;
+}
+
+var sum1 = addAges(18, 20, 31, 45);
+console.log(sum1);
+
+var ages = [18, 32, 43, 67];
+var sum2 = addAges.apply(null, ages);
+console.log(sum2);
+
+const max3 = addAges(...ages); // passing ages into function with spread
+console.log(max3);
+
+const familySmith = ["John", "Mary", "greg"];
+const brothersHart = ["Nate", "Jase", "Sam"];
+const bigFam = [...familySmith, ...brothersHart];
+console.log(bigFam)
