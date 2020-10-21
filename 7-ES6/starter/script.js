@@ -219,3 +219,15 @@ const familySmith = ["John", "Mary", "greg"];
 const brothersHart = ["Nate", "Jase", "Sam"];
 const bigFam = [...familySmith, ...brothersHart];
 console.log(bigFam)
+
+/////////////////////////////
+/* Rest Parameters */
+
+// ES5
+
+
+
+
+
+// ES6
+
